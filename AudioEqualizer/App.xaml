@@ -1,0 +1,27 @@
+﻿<Application x:Class="AudioEqualizer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AudioEqualizer"
+             xmlns:viewModel="clr-namespace:AudioEqualizer.MVVM.ViewModel"
+             xmlns:view="clr-namespace:AudioEqualizer.MVVM.View"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="/Theme/NewSliderTheme.xaml"/>
+                <ResourceDictionary Source="/Theme/ButtonTheme.xaml"/>
+                <ResourceDictionary Source="/Theme/ComboBoxTheme.xaml"/>
+                <ResourceDictionary Source="/Theme/CheckBoxTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                <view:SettingsView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

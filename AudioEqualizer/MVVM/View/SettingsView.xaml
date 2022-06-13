@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="AudioEqualizer.MVVM.View.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:AudioEqualizer.MVVM.ViewModel" 
+             xmlns:local="clr-namespace:AudioEqualizer.Core"
+             d:DataContext="{d:DesignInstance Type=viewmodel:SettingsViewModel}"
+             mc:Ignorable="d" 
+             FontFamily="/Fonts/#Poppins"
+             d:DesignHeight="402" d:DesignWidth="500">
+
+    <UserControl.Resources>
+        <local:MapConvert x:Key="Map"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Text="{Binding Gain, StringFormat=Предусиление: {0} dB}"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="20"
+                       Margin="10,4,0,4"
+                       Height="30"/>
+            <Slider Style="{StaticResource NewSliderStyle}"
+                Maximum="14"
+                Minimum="0"
+                SelectionStart="0"
+                SelectionEnd="{Binding Gain}"
+                Value="{Binding Gain, UpdateSourceTrigger=PropertyChanged}"
+                TickFrequency="2"
+                IsSnapToTickEnabled="True"
+                IsSelectionRangeEnabled="True"
+                VerticalAlignment="Bottom"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock Text="{Binding Balance, StringFormat=Баланс: {0} %}"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="20"
+                       Margin="10,4,0,4"
+                       Height="30"/>
+            <Slider Style="{StaticResource NewSliderStyle}"
+                    Maximum="100"
+                    Minimum="-100"
+                    SelectionStart="{Binding BalanceSelStart}"
+                    SelectionEnd="{Binding BalanceSelEnd}"
+                    Value="{Binding Balance}"
+                    TickFrequency="2"
+                    IsSnapToTickEnabled="True"
+                    IsSelectionRangeEnabled="True"
+                    VerticalAlignment="Bottom"/>
+        </Grid>
+
+        <Grid Grid.Row="2" Height="61" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <TextBlock Text="{Binding Brightness, Converter={StaticResource Map}, StringFormat=Яркость: {0}%}"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="20"
+                       Margin="10,4,0,4"
+                       Height="30"/>
+                <Slider Style="{StaticResource NewSliderStyle}"
+                        Maximum="255"
+                        Minimum="20"
+                        SelectionStart="20"
+                        SelectionEnd="{Binding Brightness}"
+                        Value="{Binding Brightness,UpdateSourceTrigger=PropertyChanged}"
+                        TickFrequency="5"
+                        IsSnapToTickEnabled="True"
+                        IsSelectionRangeEnabled="True"
+                        VerticalAlignment="Bottom"/>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="17*"/>
+                    <RowDefinition Height="45*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding TimeSleep, StringFormat=Время сна: {0}м}"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="20"
+                       Margin="10,4,-32,0"
+                       Height="30" Grid.RowSpan="2"/>
+                <Slider Style="{StaticResource NewSliderStyle}"
+                        Maximum="10"
+                        Minimum="1"
+                        SelectionStart="1"
+                        SelectionEnd="{Binding TimeSleep}"
+                        Value="{Binding TimeSleep, UpdateSourceTrigger=PropertyChanged}"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        IsSelectionRangeEnabled="True"
+                        VerticalAlignment="Bottom" Grid.Row="1"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Звуковой вход:"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="20"
+                       Margin="10,4,0,0"
+                       Height="30" Width="153"/>
+
+            <ComboBox Height="28"
+                      Style="{StaticResource ComboBoxStyle}"
+                      VerticalAlignment="Bottom"
+                      HorizontalAlignment="Stretch"
+                      Margin="0,0,20,10"
+                      SelectedIndex="{Binding InAudio, UpdateSourceTrigger=PropertyChanged}">
+                <ComboBoxItem Content="PC"/>
+                <ComboBoxItem Content="AUX"/>
+            </ComboBox>
+
+            <Grid Grid.Column="1">
+                <TextBlock Text="{Binding Version, UpdateSourceTrigger=Default, StringFormat={}Версия прошивки: {0}}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="20"
+                       Margin="10,4,0,0"
+                       Height="30"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Button Style="{StaticResource ButtonStyle}"
+                    Height="40" Width="220"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Content="Сохранить EEPROM принудительно"
+                    Command="{Binding SaveEEPROMClick}"/>
+        </Grid>
+    </Grid>
+
+</UserControl>

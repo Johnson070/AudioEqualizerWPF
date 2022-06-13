@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="AudioEqualizer.MVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewmodel="clr-namespace:AudioEqualizer.MVVM.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:HomeViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="402" d:DesignWidth="500"
+             FontFamily="/Fonts/#Poppins">
+    <Grid>
+        <StackPanel RenderTransformOrigin="0.499,0.496">
+            <TextBlock Foreground="White"
+                   FontSize="22"
+                   HorizontalAlignment="Center"
+                   Padding="0,0,0,10">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Громкость: {0} {1}">
+                        <Binding Path="Volume" />
+                        <Binding Path="Postfix" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Slider Maximum="0"
+                    Minimum="-87"
+                    SelectionStart="{Binding VolumeSelectionStart}"
+                    SelectionEnd="{Binding VolumeSelectionEnd}"
+                    TickFrequency="1"
+                    IsSnapToTickEnabled="True"
+                    IsSelectionRangeEnabled="True"
+                    Style="{StaticResource NewSliderStyle}"
+                    Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged}"/>
+                <!--{Binding Volume, UpdateSourceTrigger=PropertyChanged}-->
+
+            <TextBlock Foreground="White" 
+                   FontSize="22" 
+                   HorizontalAlignment="Center"
+                   Padding="0,10,0,10">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Басс: {0} {1}">
+                        <Binding Path="Bass" />
+                        <Binding Path="Postfix" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Slider Maximum="14"
+                    Minimum="-14"
+                    SelectionStart="{Binding BassSelectionStart}"
+                    SelectionEnd="{Binding BassSelectionEnd}"
+                    TickFrequency="2"
+                    IsSnapToTickEnabled="True"
+                    IsSelectionRangeEnabled="True"
+                    Style="{StaticResource NewSliderStyle}"
+                    Value="{Binding Bass, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Foreground="White" 
+                   FontSize="22" 
+                   HorizontalAlignment="Center"
+                   Padding="0,10,0,10">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}Высокие: {0} {1}">
+                        <Binding Path="Treble" />
+                        <Binding Path="Postfix" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Slider Maximum="14"
+                    Minimum="-14"
+                    SelectionStart="{Binding TrebleSelectionStart}"
+                    SelectionEnd="{Binding TrebleSelectionEnd}"
+                    TickFrequency="2"
+                    IsSnapToTickEnabled="True"
+                    IsSelectionRangeEnabled="True"
+                    Style="{StaticResource NewSliderStyle}"
+                    Value="{Binding Treble, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <Button VerticalAlignment="Bottom" 
+                Name="resetBtn"
+                Height="40" Width="180" 
+                Margin="30" 
+                FontSize="20" 
+                Content="Сбросить" 
+                Style="{DynamicResource ButtonStyle}"
+                Command="{Binding ButtonResetClick}"/>
+
+        <CheckBox VerticalAlignment="Bottom" 
+                Name="muteBtn"
+                Height="40" Width="180" 
+                Margin="100" 
+                FontSize="20" 
+                Content="Без звука" 
+                Foreground="Black"
+                IsChecked="{Binding Mute, UpdateSourceTrigger=PropertyChanged}"
+                Style="{DynamicResource CheckBoxStyle}"/>
+
+        <!--Command="{Binding ButtonMuteClick}"-->
+
+        <!--<TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="{Binding COM, StringFormat={}Connected to {0}}"/>-->
+    </Grid>
+    
+    
+</UserControl>
