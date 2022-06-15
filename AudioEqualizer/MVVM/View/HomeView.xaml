@@ -37,7 +37,7 @@
                    HorizontalAlignment="Center"
                    Padding="0,10,0,10">
                 <TextBlock.Text>
-                    <MultiBinding StringFormat="{}Басс: {0} {1}">
+                    <MultiBinding StringFormat="Басс: {0} {1}">
                         <Binding Path="Bass" />
                         <Binding Path="Postfix" />
                     </MultiBinding>

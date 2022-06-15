@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("AudioEqualizer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("by Johnson070")]
 [assembly: AssemblyProduct("AudioEqualizer")]
-[assembly: AssemblyCopyright("Copyright ©  2022")]
+[assembly: AssemblyCopyright("Copyright © Vladimir Veber 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
